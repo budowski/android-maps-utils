@@ -102,6 +102,30 @@ public class Renderer {
 
     private final GeoJsonPolygonStyle mDefaultPolygonStyle;
 
+    // Should polygons added to the map be clickable?
+    private boolean mPolygonsClickable = true;
+
+
+    /**
+     * Returns whether or not added polygons are clickable.
+     *
+     * @return true if polygons are clickable, false otherwise.
+     */
+    public boolean getPolygonsClickable() {
+        return mPolygonsClickable;
+    }
+
+    /**
+     * Sets whether or not polygons added to the map are clickable or not (default = true).
+     * Setting them as non-clickable is useful when adding clickable markers inside the polygon area (otherwise,
+     * we cannot capture marker being clicked inside the polygon).
+     *
+     * @param clickable true if polygons should be clickable, false otherwise
+     */
+    public void setPolygonsClickable(boolean clickable) {
+        mPolygonsClickable = clickable;
+    }
+
     /**
      * Creates a new Renderer object
      *
@@ -641,7 +665,7 @@ public class Renderer {
         // Add coordinates
         polylineOptions.addAll(lineString.getGeometryObject());
         Polyline addedPolyline = mMap.addPolyline(polylineOptions);
-        addedPolyline.setClickable(true);
+        addedPolyline.setClickable(mPolygonsClickable);
         return addedPolyline;
     }
 
@@ -680,7 +704,7 @@ public class Renderer {
             polygonOptions.addHole(innerBoundary);
         }
         Polygon addedPolygon = mMap.addPolygon(polygonOptions);
-        addedPolygon.setClickable(true);
+        addedPolygon.setClickable(mPolygonsClickable);
         return addedPolygon;
     }
 

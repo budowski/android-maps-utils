@@ -75,6 +75,27 @@ public abstract class Layer {
         }
     }
 
+
+    /**
+     * Returns whether or not added polygons are clickable.
+     *
+     * @return true if polygons are clickable, false otherwise.
+     */
+    public boolean getPolygonsClickable() {
+        return mRenderer.getPolygonsClickable();
+    }
+
+    /**
+     * Sets whether or not polygons added to the map are clickable or not (default = true).
+     * Setting them as non-clickable is useful when adding clickable markers inside the polygon area (otherwise,
+     * we cannot capture marker being clicked inside the polygon).
+     *
+     * @param clickable true if polygons should be clickable, false otherwise
+     */
+    public void setPolygonsClickable(boolean clickable) {
+        mRenderer.setPolygonsClickable(clickable);
+    }
+
     /**
      * Sets a single click listener for the entire GoogleMap object, that will be called
      * with the corresponding Feature object when an object on the map (Polygon,
