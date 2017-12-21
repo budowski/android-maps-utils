@@ -3,12 +3,6 @@ apply plugin: 'maven'
 
 group = 'com.google.maps.android'
 
-dependencies {
-    compile project(':library')
-    // Or, fetch from Maven:
-    // compile 'com.google.maps.android:android-maps-utils:0.3+'
-    compile 'com.google.android.gms:play-services-maps:9.6.1'
-}
 
 android {
     compileSdkVersion 25
@@ -34,8 +28,10 @@ android {
     }
 }
 
-task startDemo(type: Exec) {
-    dependsOn 'installDebug'
-    def adb = new File("${System.env.ANDROID_HOME}", "platform-tools${File.separator}adb")
-    commandLine adb, "shell", "am", "start", "-n", "com.google.maps.android.utils.demo/.MainActivity"
+dependencies {
+    compile project(':library')
+    // Or, fetch from Maven:
+    // compile 'com.google.maps.android:android-maps-utils:0.3+'
+    compile 'com.google.android.gms:play-services-maps:9.6.1'
 }
+
